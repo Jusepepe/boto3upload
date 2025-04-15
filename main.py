@@ -4,6 +4,7 @@ from botocore.exceptions import ClientError
 import os
 import sys
 import threading
+from cameraController import capture_image
 
 class ProgressPercentage(object):
 
@@ -40,14 +41,30 @@ def upload_file(file_name, bucket, object_name=None):
         return False
     return True
 
+def upload_fileobj(data, bucket, object_name=None):
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = "image"
+
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_fileobj(data, bucket, object_name)
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
+
 
 try:
     while True:
-        file_name = input("Escribir el nombre del archivo a subir(o 'exit' para salir:)")
-        if file_name.lower == "exit":
-            break
-        upload_file(file_name, "citric-bucket")
-        print("")
+        file_name = input("Escribir el nombre del archivo a subir(o 't' para tomar foto:)")
+        if file_name.lower == "t":
+            data = capture_image()
+            upload_fileobj(data, "citric-bucket")
+        else:
+            upload_file(file_name, "citric-bucket")
 
 except KeyboardInterrupt:
     pass
