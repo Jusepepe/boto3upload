@@ -45,7 +45,7 @@ def upload_fileobj(data, bucket, object_name=None):
 
     # If S3 object_name was not specified, use file_name
     if object_name is None:
-        object_name = "image"
+        object_name = "images/image-captured.jpg"
 
     # Upload the file
     s3_client = boto3.client('s3')
