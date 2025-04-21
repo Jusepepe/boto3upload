@@ -62,6 +62,7 @@ try:
         file_name = input("Escribir el nombre del archivo a subir(o 't' para tomar foto:)")
         print(file_name)
         if file_name.lower == "tomar":
+            break
             data = capture_image()
             upload_fileobj(data, "citric-bucket")
         else:
