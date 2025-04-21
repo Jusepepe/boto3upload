@@ -7,5 +7,5 @@ def capture_image():
     picam2.start()
     sleep(1)
     data = io.BytesIO()
-    picam2.capture_files(data, format='jpeg')
+    picam2.capture_file(data, format='jpeg')
     return data
