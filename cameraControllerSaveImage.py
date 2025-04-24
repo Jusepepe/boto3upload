@@ -1,9 +1,12 @@
-from picamera2 import Picamera2
-import io
-from time import sleep
+import time
+
+from picamera2 import Picamera2, Preview
 
 picam2 = Picamera2()
-capture_config = picam2.create_still_configuration()
-picam2.start(show_preview=False)
-sleep(1)
-picam2.switch_mode_and_capture_file(capture_config, "image.jpg")
+picam2.start_preview(Preview.QT)
+
+preview_config = picam2.create_preview_configuration()
+picam2.configure(preview_config)
+
+picam2.start()
+time.sleep(5)
