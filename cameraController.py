@@ -2,8 +2,17 @@ from picamera2 import Picamera2
 import io
 from time import sleep
 
+class Camera():
+    _instance = None
+
+    def __call__(cls):
+        if Camera._instance is None:
+            Camera._instance = Picamera2()
+
+        return Camera._instance
+
 def capture_image():
-    picam2 = Picamera2()
+    picam2 = Camera()
     
     picam2.start()
     sleep(1)
