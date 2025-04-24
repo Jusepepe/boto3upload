@@ -5,7 +5,7 @@ from time import sleep
 class Camera():
     _instance = None
 
-    def __call__(cls):
+    def __new__(cls):
         if Camera._instance is None:
             Camera._instance = Picamera2()
 

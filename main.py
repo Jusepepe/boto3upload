@@ -4,7 +4,9 @@ from botocore.exceptions import ClientError
 import os
 import sys
 import threading
-from cameraController import capture_image
+from picamera2 import Picamera2
+import io
+from time import sleep
 
 class ProgressPercentage(object):
 
@@ -56,11 +58,22 @@ def upload_fileobj(data, bucket, object_name=None):
         return False
     return True
 
+def capture_image():
+    
+    picam2.start()
+    sleep(1)
+    data = io.BytesIO()
+    picam2.capture_file(data, format='jpeg')
+    data.seek(0)
+    return data
 
 try:
+    
+    picam2 = Picamera2()
     while True:
         file_name = input("Escribir el nombre del archivo a subir(o 't' para tomar foto:)")
         print(file_name)
+        
         if file_name.lower() == "t":
             data = capture_image()
             upload_fileobj(data, "citric-bucket")
