@@ -65,6 +65,8 @@ def capture_image():
     data = io.BytesIO()
     picam2.capture_file(data, format='jpeg')
     data.seek(0)
+    picam2.stop()
+    
     return data
 
 try:
