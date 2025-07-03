@@ -5,11 +5,23 @@ class PanTilt:
         self.pan = ServoController(pan_pin)
         self.tilt = ServoController(tilt_pin)
 
-    def set_pan(self, angle):
-        self.pan.set_angle(angle)
+    def sweep_pan_left(self):
+        self.pan.sweep_to(0)
 
-    def set_tilt(self, angle):
-        self.tilt.set_angle(angle)
+    def sweep_pan_right(self):
+        self.pan.sweep_to(180)
+
+    def sweep_pan_center(self):
+        self.pan.sweep_to(90)
+
+    def sweep_tilt_up(self):
+        self.tilt.sweep_to(180)
+
+    def sweep_tilt_three_quarter_up(self):
+        self.tilt.sweep_to(150)
+
+    def sweep_tilt_quarter_up(self):
+        self.tilt.sweep_to(120)
 
     def cleanup(self):
         self.pan.cleanup()
