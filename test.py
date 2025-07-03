@@ -1,15 +1,8 @@
-views: dict = {
-    "front": {
-        "pan": ["left","center","right"],
-        "tilt": [0, 90, 180]
-    },
-    "back": {
-        "pan": ["left","center","right"],
-        "tilt": [0, 90, 180]
-    }
-}
+import PanTilt
 
-for view in views:
-    print(view)
-    for pan in views[view]["pan"]:
-        print(pan)
+pan_tilt_1: PanTilt = PanTilt(17, 27)
+pan_tilt_2: PanTilt = PanTilt(23, 24)
+
+pan_tilt_1.sweep_tilt_up()
+pan_tilt_1.sweep_pan_left()
+
