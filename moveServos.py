@@ -36,8 +36,8 @@ lower_sequence = [
     PanTilt.sweep_pan_right
 ]
 
-pan_tilt_1: PanTilt = PanTilt(17, 18)
-pan_tilt_2: PanTilt = PanTilt(27, 22)
+pan_tilt_1: PanTilt = PanTilt(17, 27)
+pan_tilt_2: PanTilt = PanTilt(23, 24)
 camera_1: cameraController.Camera = cameraController.Camera(0)
 camera_2: cameraController.Camera = cameraController.Camera(1)
 
