@@ -1,4 +1,4 @@
-import ServoController
+from ServoController import ServoController
 
 class PanTilt:
     def __init__(self, pan_pin, tilt_pin):
