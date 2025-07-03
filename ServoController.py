@@ -11,6 +11,7 @@ class ServoController:
         self.current_angle = 0
 
     def set_angle(self, angle):
+        print("Setting angle to", angle)
         duty_cycle = angle / 18 + 2
         self.pwm.ChangeDutyCycle(duty_cycle)
         time.sleep(0.1)
