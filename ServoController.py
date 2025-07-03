@@ -8,7 +8,7 @@ class ServoController:
         GPIO.setup(self.pin, GPIO.OUT)
         self.pwm = GPIO.PWM(self.pin, 50)
         self.pwm.start(0)
-        self.current_angle = 0
+        self.current_angle = None
 
     def set_angle(self, angle):
         print("Setting angle to", angle)
