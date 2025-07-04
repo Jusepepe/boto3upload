@@ -6,8 +6,8 @@ class PanTilt:
         self.tilt = ServoController(tilt_pin)
 
     def reset(self):
-        self.pan.set_angle(90)
-        self.tilt.set_angle(90)
+        self.pan.sweep_to(90)
+        self.tilt.sweep_to(90)
 
     def sweep_pan_left(self):
         print("Sweeping pan left")

@@ -1,110 +1,117 @@
-import PanTilt
-import cameraController
-import upload_fileobj
-from typing import List
+import platform
 import time
+from boto_controller import upload_fileobj
 
 day: str = time.strftime("%Y-%m-%d", time.localtime())
 hour: str = time.strftime("%H:00_%p", time.localtime())
 path: str = day + "/raw/" + hour + "/"
-
 bucket_name: str = 'citric-bucket'
 
-upper_sequence = [
-    PanTilt.sweep_tilt_up,
-    PanTilt.sweep_pan_left,
-    PanTilt.sweep_pan_center,
-    PanTilt.sweep_pan_right
-]
+if platform.system() == "Windows":
+    from pan_tilt_mock import PanTiltMock
+    from camera_mock import CameraMock
+    pan_tilt_1: PanTiltMock = PanTiltMock(17, 27)
+    pan_tilt_2: PanTiltMock = PanTiltMock(23, 24)
+    camera_1: CameraMock = CameraMock(0)
+    camera_2: CameraMock = CameraMock(1)
+else:
+    from PanTilt import PanTilt
+    from camera_controller import Camera
+    pan_tilt_1: PanTilt = PanTilt(17, 27)
+    pan_tilt_2: PanTilt = PanTilt(23, 24)
+    camera_1: Camera = Camera(0)
+    camera_2: Camera = Camera(1)
 
-middle_sequence = [
-    PanTilt.sweep_tilt_three_quarter_up,
-    PanTilt.sweep_pan_center,
-    PanTilt.sweep_pan_left
-]
+pan_tilt_1.reset()
+pan_tilt_2.reset()
 
-lower_sequence = [
-    PanTilt.sweep_tilt_quarter_up,
-    PanTilt.sweep_pan_center,
-    PanTilt.sweep_pan_right
-]
+print("Reset")
 
-lower_sequence = [
-    PanTilt.sweep_tilt_quarter_up,
-    PanTilt.sweep_pan_left,
-    PanTilt.sweep_pan_center,
-    PanTilt.sweep_pan_right
-]
+time.sleep(2)
 
-pan_tilt_1: PanTilt = PanTilt(17, 27)
-pan_tilt_2: PanTilt = PanTilt(23, 24)
-camera_1: cameraController.Camera = cameraController.Camera(0)
-camera_2: cameraController.Camera = cameraController.Camera(1)
+def capture_image():
+    data_1 = camera_1.capture_image()
+    data_2 = camera_2.capture_image()
+    return data_1, data_2
 
-#Upper Left
-pan_tilt_1.sweep_tilt_up()
-pan_tilt_1.sweep_pan_left()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/left")
-upload_fileobj(data_2, bucket_name, path + "back/left")
+def upload_images(data_1, data_2, direction):
+    upload_fileobj(data_1, bucket_name, path + "front/" + direction)
+    upload_fileobj(data_2, bucket_name, path + "back/" + direction)
 
-#Upper Center
-pan_tilt_1.sweep_pan_center()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/center")
-upload_fileobj(data_2, bucket_name, path + "back/center")
+def move_left():
+    pan_tilt_1.pan.sweep_to(0)
+    pan_tilt_2.pan.sweep_to(180)
+    pan = "Left"
+    return pan
 
-#Upper Right
-pan_tilt_1.sweep_pan_right()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/right")
-upload_fileobj(data_2, bucket_name, path + "back/right")
+def move_center():
+    pan_tilt_1.pan.sweep_to(90)
+    pan_tilt_2.pan.sweep_to(90)
+    pan = "Center"
+    return pan
 
-#Middle Right
-pan_tilt_1.sweep_tilt_three_quarter_up()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/right")
-upload_fileobj(data_2, bucket_name, path + "back/right")
+def move_right():
+    pan_tilt_1.pan.sweep_to(180)
+    pan_tilt_2.pan.sweep_to(0)
+    pan = "Right"
+    return pan
 
-#Middle Center
-pan_tilt_1.sweep_pan_center()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/center")
-upload_fileobj(data_2, bucket_name, path + "back/center")
+def move_up():
+    pan_tilt_1.tilt.sweep_to(180)
+    pan_tilt_2.tilt.sweep_to(180)
+    tilt = "Up"
+    return tilt
 
-#Middle Left
-pan_tilt_1.sweep_pan_left()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/left")
-upload_fileobj(data_2, bucket_name, path + "back/left")
+def move_quarter_up():
+    pan_tilt_1.tilt.sweep_to(150)
+    pan_tilt_2.tilt.sweep_to(150)
+    tilt = "Quarter Up"
+    return tilt
+def move_three_quarter_up():
+    pan_tilt_1.tilt.sweep_to(120)
+    pan_tilt_2.tilt.sweep_to(120)
+    tilt = "Three Quarter Up"
+    return tilt
 
-#Lower Left
-pan_tilt_1.sweep_tilt_quarter_up()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/left")
-upload_fileobj(data_2, bucket_name, path + "back/left")
+def upper_sequence_left() -> list:
+    return [move_up(), move_left()]
 
-#Lower Center
-pan_tilt_1.sweep_pan_center()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/center")
-upload_fileobj(data_2, bucket_name, path + "back/center")
+def upper_sequence_center() -> list:
+    return [move_up(), move_center()]
 
-#Lower Right
-pan_tilt_1.sweep_pan_right()
-data_1 = camera_1.capture_image()
-data_2 = camera_2.capture_image()
-upload_fileobj(data_1, bucket_name, path + "front/right")
-upload_fileobj(data_2, bucket_name, path + "back/right")
+def upper_sequence_right() -> list:
+    return [move_up(), move_right()]
+
+def middle_sequence_right() -> list:
+    return [move_quarter_up(), move_right()]
+
+def middle_sequence_center() -> list:
+    return [move_quarter_up(), move_center()]
+
+def middle_sequence_left() -> list:
+    return [move_quarter_up(), move_left()]
+
+def lower_sequence_left() -> list:
+    return [move_three_quarter_up(), move_left()]
+
+def lower_sequence_center() -> list:
+    return [move_three_quarter_up(), move_center()]
+
+def lower_sequence_right() -> list:
+    return [move_three_quarter_up(), move_right()]
+
+complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right, middle_sequence_right, middle_sequence_center, middle_sequence_left, lower_sequence_left, lower_sequence_center, lower_sequence_right]
+
+new_direction = None
+
+for i, sequence in enumerate(complete_sequence):
+    tilt, pan = sequence()
+    direction = tilt + "_" + pan
+
+    print("N°", i)
+    print("Direction:", direction)
+    data_1, data_2 = capture_image()
+    upload_images(data_1, data_2, direction)
 
 pan_tilt_1.cleanup()
 pan_tilt_2.cleanup()
-
