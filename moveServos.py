@@ -39,8 +39,8 @@ def capture_image():
     return data_1, data_2
 
 def upload_images(data_1, data_2, direction):
-    upload_fileobj(data_1, bucket_name, path + "front/" + direction)
-    upload_fileobj(data_2, bucket_name, path + "back/" + direction)
+    upload_fileobj(data_1, bucket_name, path + "front/" + direction + ".jpg")
+    upload_fileobj(data_2, bucket_name, path + "back/" + direction + ".jpg")
 
 def move_left():
     pan_tilt_1.pan.set_angle(95)
