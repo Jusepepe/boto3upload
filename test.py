@@ -12,7 +12,7 @@ def reset_servos():
 
 def move_left():
     pan_tilt_1.pan.set_angle(95)
-    pan_tilt_2.pan.set_angle(60)
+    pan_tilt_2.pan.set_angle(55)
     pan = "Left"
     return pan
 
@@ -23,8 +23,8 @@ def move_center():
     return pan
 
 def move_right():
-    pan_tilt_1.pan.set_angle(45)
-    pan_tilt_2.pan.set_angle(100)
+    pan_tilt_1.pan.set_angle(35)
+    pan_tilt_2.pan.set_angle(110)
     pan = "Right"
     return pan
 
@@ -40,7 +40,7 @@ def move_quarter_up():
     tilt = "Quarter Up"
     return tilt
 def move_three_quarter_up():
-    pan_tilt_1.tilt.set_angle(150)
+    pan_tilt_1.tilt.set_angle(160)
     pan_tilt_2.tilt.set_angle(100)
     tilt = "Three Quarter Up"
     return tilt
