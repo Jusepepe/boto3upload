@@ -82,8 +82,6 @@ for i, sequence in enumerate(complete_sequence):
 
     print("N°", i)
     print("Direction:", direction)
-    data_1, data_2 = capture_image()
-    upload_images(data_1, data_2, direction)
     time.sleep(5)
 
 pan_tilt_1.cleanup()
