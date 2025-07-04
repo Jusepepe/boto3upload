@@ -23,10 +23,10 @@ else:
     camera_2: Camera = Camera(1)
 
 def reset_servos():
-    pan_tilt_1.pan.set_angle(90)
-    pan_tilt_2.pan.set_angle(90)
-    pan_tilt_1.tilt.set_angle(90)
-    pan_tilt_2.tilt.set_angle(90)
+    pan_tilt_1.pan.set_angle(75)
+    pan_tilt_2.pan.set_angle(80)
+    pan_tilt_1.tilt.set_angle(200)
+    pan_tilt_2.tilt.set_angle(145)
 
 reset_servos()
 print("Reset")
@@ -43,37 +43,37 @@ def upload_images(data_1, data_2, direction):
     upload_fileobj(data_2, bucket_name, path + "back/" + direction)
 
 def move_left():
-    pan_tilt_1.pan.sweep_to(0)
-    pan_tilt_2.pan.sweep_to(180)
+    pan_tilt_1.pan.sweep_to(95)
+    pan_tilt_2.pan.sweep_to(60)
     pan = "Left"
     return pan
 
 def move_center():
-    pan_tilt_1.pan.sweep_to(90)
-    pan_tilt_2.pan.sweep_to(90)
+    pan_tilt_1.pan.sweep_to(75)
+    pan_tilt_2.pan.sweep_to(80)
     pan = "Center"
     return pan
 
 def move_right():
-    pan_tilt_1.pan.sweep_to(180)
-    pan_tilt_2.pan.sweep_to(0)
+    pan_tilt_1.pan.sweep_to(45)
+    pan_tilt_2.pan.sweep_to(100)
     pan = "Right"
     return pan
 
 def move_up():
-    pan_tilt_1.tilt.sweep_to(180)
-    pan_tilt_2.tilt.sweep_to(180)
+    pan_tilt_1.tilt.sweep_to(200)
+    pan_tilt_2.tilt.sweep_to(145)
     tilt = "Up"
     return tilt
 
 def move_quarter_up():
-    pan_tilt_1.tilt.sweep_to(150)
-    pan_tilt_2.tilt.sweep_to(150)
+    pan_tilt_1.tilt.sweep_to(175)
+    pan_tilt_2.tilt.sweep_to(125)
     tilt = "Quarter Up"
     return tilt
 def move_three_quarter_up():
-    pan_tilt_1.tilt.sweep_to(120)
-    pan_tilt_2.tilt.sweep_to(120)
+    pan_tilt_1.tilt.sweep_to(150)
+    pan_tilt_2.tilt.sweep_to(100)
     tilt = "Three Quarter Up"
     return tilt
 
