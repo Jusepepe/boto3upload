@@ -1,5 +1,5 @@
 from PanTilt import PanTilt
-import sys
+import time
 
 pan_tilt_1: PanTilt = PanTilt(17, 27)
 pan_tilt_2: PanTilt = PanTilt(23, 24)
