@@ -2,7 +2,7 @@ from PanTilt import PanTilt
 import time
 
 pan_tilt_1: PanTilt = PanTilt(17, 27)
-pan_tilt_2: PanTilt = PanTilt(23, 24)
+pan_tilt_2: PanTilt = PanTilt(25, 24)
 
 def reset_servos():
     pan_tilt_1.pan.set_angle(75)
