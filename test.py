@@ -84,7 +84,5 @@ for i, sequence in enumerate(complete_sequence):
     print("Direction:", direction)
     time.sleep(5)
 
-pan_tilt_1.cleanup()
-pan_tilt_2.cleanup()
 
 
