@@ -82,7 +82,7 @@ for i, sequence in enumerate(complete_sequence):
 
     print("N°", i)
     print("Direction:", direction)
-    time.sleep(5)
+    time.sleep(2)
 
 
 
