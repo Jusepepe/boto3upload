@@ -11,7 +11,7 @@ if platform.system() == "Windows":
     from pan_tilt_mock import PanTiltMock
     from camera_mock import CameraMock
     pan_tilt_1: PanTiltMock = PanTiltMock(17, 27)
-    pan_tilt_2: PanTiltMock = PanTiltMock(23, 24)
+    pan_tilt_2: PanTiltMock = PanTiltMock(25, 24)
     camera_1: CameraMock = CameraMock(0)
     camera_2: CameraMock = CameraMock(1)
 else:
