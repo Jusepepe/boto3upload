@@ -22,9 +22,13 @@ else:
     camera_1: Camera = Camera(0)
     camera_2: Camera = Camera(1)
 
-pan_tilt_1.reset()
-pan_tilt_2.reset()
+def reset_servos():
+    pan_tilt_1.pan.set_angle(90)
+    pan_tilt_2.pan.set_angle(90)
+    pan_tilt_1.tilt.set_angle(90)
+    pan_tilt_2.tilt.set_angle(90)
 
+reset_servos()
 print("Reset")
 
 time.sleep(2)
