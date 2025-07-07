@@ -18,13 +18,13 @@ class ServoController:
         self.pwm.ChangeDutyCycle(0)
         self.current_angle = angle
 
-    def sweep_to(self, target_angle, step=5):
+    def sweep_to(self, target_angle, step=1):
         target_angle = max(0, min(180, target_angle))
         if target_angle < self.current_angle:
             step = -step
         for angle in range(self.current_angle, target_angle + 1, step):
             self.set_angle(angle)
-            time.sleep(0.2)
+            time.sleep(0.7)
 
     def cleanup(self):
         self.pwm.stop()
