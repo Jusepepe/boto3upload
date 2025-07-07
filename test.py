@@ -13,17 +13,15 @@ tilt1_up = 200
 tilt2_up = 145
 tilt1_quarter_up = 175
 tilt2_quarter_up = 125
-tilt1_three_quarter_up = 160
-tilt2_three_quarter_up = 100
 
 def reset_servos():
     pan_tilt_1.pan.set_angle(pan1_center)
     time.sleep(1)
     pan_tilt_2.pan.set_angle(pan2_center)
     time.sleep(1)
-    pan_tilt_1.tilt.set_angle(tilt1_quarter_up)
+    pan_tilt_1.tilt.set_angle(tilt1_up)
     time.sleep(1)
-    pan_tilt_2.tilt.set_angle(tilt2_quarter_up)
+    pan_tilt_2.tilt.set_angle(tilt2_up)
     time.sleep(1)
 
 def move_left():
