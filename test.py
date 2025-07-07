@@ -4,9 +4,12 @@ import time
 pan_tilt_1: PanTilt = PanTilt(17, 27)
 pan_tilt_2: PanTilt = PanTilt(25, 24)
 
+pan1_center = 75
+pan2_center = 80
+
 def reset_servos():
-    pan_tilt_1.pan.set_angle(75)
-    pan_tilt_2.pan.set_angle(80)
+    pan_tilt_1.pan.set_angle(pan1_center)
+    pan_tilt_2.pan.set_angle(pan2_center)
     pan_tilt_1.tilt.set_angle(200)
     pan_tilt_2.tilt.set_angle(145)
 
@@ -17,8 +20,8 @@ def move_left():
     return pan
 
 def move_center():
-    pan_tilt_1.pan.set_angle(75)
-    pan_tilt_2.pan.set_angle(80)
+    pan_tilt_1.pan.set_angle(pan1_center)
+    pan_tilt_2.pan.set_angle(pan2_center)
     pan = "Center"
     return pan
 
@@ -39,11 +42,6 @@ def move_quarter_up():
     pan_tilt_2.tilt.set_angle(125)
     tilt = "Quarter Up"
     return tilt
-def move_three_quarter_up():
-    pan_tilt_1.tilt.set_angle(160)
-    pan_tilt_2.tilt.set_angle(100)
-    tilt = "Three Quarter Up"
-    return tilt
 
 def upper_sequence_left() -> list:
     return [move_up(), move_left()]
@@ -63,16 +61,7 @@ def middle_sequence_center() -> list:
 def middle_sequence_left() -> list:
     return [move_quarter_up(), move_left()]
 
-def lower_sequence_left() -> list:
-    return [move_three_quarter_up(), move_left()]
-
-def lower_sequence_center() -> list:
-    return [move_three_quarter_up(), move_center()]
-
-def lower_sequence_right() -> list:
-    return [move_three_quarter_up(), move_right()]
-
-complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right, middle_sequence_right, middle_sequence_center, middle_sequence_left, lower_sequence_left, lower_sequence_center, lower_sequence_right]
+complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right, middle_sequence_right, middle_sequence_center, middle_sequence_left]
 
 reset_servos()
 
