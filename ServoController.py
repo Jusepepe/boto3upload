@@ -24,7 +24,7 @@ class ServoController:
             step = -step
         for angle in range(self.current_angle, target_angle + 1, step):
             self.set_angle(angle)
-            time.sleep(0.1)
+            time.sleep(0.2)
 
     def cleanup(self):
         self.pwm.stop()
