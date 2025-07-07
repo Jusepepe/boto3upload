@@ -9,8 +9,8 @@ is_quarter_up = False
 
 pan1_center = 75
 pan2_center = 80
-tilt1_up = 200
-tilt2_up = 145
+tilt1_up = 198
+tilt2_up = 140
 tilt1_quarter_up = 175
 tilt2_quarter_up = 125
 
