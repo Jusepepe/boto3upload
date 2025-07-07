@@ -4,7 +4,7 @@ from boto_controller import upload_fileobj
 
 day: str = time.strftime("%Y-%m-%d", time.localtime())
 hour: str = time.strftime("%H:00_%p", time.localtime())
-path: str = day + "/raw/" + hour + "/"
+path: str = day + "/raw/" + hour + "/Track_1/"
 bucket_name: str = 'citric-bucket'
 
 is_up = False
@@ -41,16 +41,12 @@ def reset_servos():
     pan_tilt_2.tilt.set_angle(tilt2_angles["up"])
     time.sleep(1)
 
-print("Reset")
-reset_servos()
-time.sleep(2)
-
 def capture_image():
     data_1 = camera_1.capture_image()
     data_2 = camera_2.capture_image()
     return data_1, data_2
 
-def upload_images(data_1, data_2, direction):
+def upload_images(data_1, data_2, path, direction):
     upload_fileobj(data_1, bucket_name, path + "front/" + direction + ".jpg")
     upload_fileobj(data_2, bucket_name, path + "back/" + direction + ".jpg")
 
@@ -124,11 +120,16 @@ def middle_sequence_left() -> list:
 
 complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right, middle_sequence_left, middle_sequence_center, middle_sequence_right]
 
-for i, sequence in enumerate(complete_sequence):
-    tilt, pan = sequence()
-    direction = tilt + "_" + pan
+if __name__ == "__main__":
+    print("Reset")
+    reset_servos()
+    time.sleep(2)
 
-    print("N°", i)
-    print("Direction:", direction)
-    data_1, data_2 = capture_image()
-    upload_images(data_1, data_2, direction)
+    for i, sequence in enumerate(complete_sequence):
+        tilt, pan = sequence()
+        direction = tilt + "_" + pan
+
+        print("N°", i)
+        print("Direction:", direction)
+        data_1, data_2 = capture_image()
+        upload_images(data_1, data_2, path, direction)

@@ -42,39 +42,42 @@ esp0 = ESPController("http://172.20.10.5/", "adelante")
 esp1 = ESPController("http://172.20.10.6/", "atras")
 
 def moveForward():
+    return "Moviendo hacia adelante"
     esp1.disable()
     esp0.enable()
     esp0.step()
     return "Moviendo hacia adelante"
 
 def moveBack():
+    return "Moviendo hacia atras"
     esp0.disable()
     esp1.enable()
     esp1.step()
     return "Moviendo hacia atras"
 
-
-try:
-    while True:
-        try:
-            status0 = esp0.status()
-        except requests.exceptions.Timeout as e:
-            print(e.request.url)
-            continue
-        try:
-            status1 = esp1.status()
-        except requests.exceptions.Timeout as e:
-            print(e.request.url)
+if __name__ == "__main__":
+    try:
+        while True:
+            try:
+                status0 = esp0.status()
+            except requests.exceptions.Timeout as e:
+                print(e.request.url)
+                continue
+            try:
+                status1 = esp1.status()
+            except requests.exceptions.Timeout as e:
+                print(e.request.url)
         
-        if status0 == "Motor funcionando" and status1 == "Motor funcionando":
-            print("Ambos motores funcionando")
-            user_input = input("Movimiento (f/b/q): ")
-            if user_input == "f":
-                print(moveForward())
-            elif user_input == "b":
-                print(moveBack())
-            elif user_input == "q":
-                break
-except KeyboardInterrupt:
-    pass
+            if status0 == "Motor funcionando" and status1 == "Motor funcionando":
+                print("Ambos motores funcionando")
+                user_input = input("Movimiento (f/b/q): ")
+                if user_input == "f":
+                    print(moveForward())
+                elif user_input == "b":
+                    print(moveBack())
+                elif user_input == "q":
+                    break
+    except KeyboardInterrupt:
+        pass
+
 
