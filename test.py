@@ -7,43 +7,41 @@ pan_tilt_2: PanTilt = PanTilt(25, 24)
 is_up = False
 is_quarter_up = False
 
-pan1_center = 75
-pan2_center = 80
-tilt1_up = 198
-tilt2_up = 140
-tilt1_quarter_up = 175
-tilt2_quarter_up = 125
+pan1 = {"left": 95, "center": 75, "right": 35}
+pan2 = {"left": 55, "center": 80, "right": 110}
+tilt1 = {"up": 198, "quarter_up": 175}
+tilt2 = {"up": 140, "quarter_up": 125}
 
 def reset_servos():
-    pan_tilt_1.pan.set_angle(pan1_center)
+    pan_tilt_1.pan.set_angle(pan1["center"])
     time.sleep(1)
-    pan_tilt_2.pan.set_angle(pan2_center)
+    pan_tilt_2.pan.set_angle(pan2["center"])
     time.sleep(1)
-    pan_tilt_1.tilt.set_angle(tilt1_up)
+    pan_tilt_1.tilt.set_angle(tilt1["up"])
     time.sleep(1)
-    pan_tilt_2.tilt.set_angle(tilt2_up)
+    pan_tilt_2.tilt.set_angle(tilt2["up"])
     time.sleep(1)
 
 def move_left():
-    pan_tilt_1.pan.sweep_to(95)
+    pan_tilt_1.pan.sweep_to(pan1["left"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(55)
+    pan_tilt_2.pan.sweep_to(pan2["right"])
     time.sleep(1)
     pan = "Left"
     return pan
 
 def move_center():
-    pan_tilt_1.pan.sweep_to(pan1_center)
+    pan_tilt_1.pan.sweep_to(pan1["center"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(pan2_center)
+    pan_tilt_2.pan.sweep_to(pan2["center"])
     time.sleep(1)
     pan = "Center"
     return pan
 
 def move_right():
-    pan_tilt_1.pan.sweep_to(35)
+    pan_tilt_1.pan.sweep_to(pan1["right"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(110)
+    pan_tilt_2.pan.sweep_to(pan2["left"])
     time.sleep(1)
     pan = "Right"
     return pan
@@ -52,9 +50,9 @@ def move_up():
     global is_up
     if is_up:
         return "Up"
-    pan_tilt_1.tilt.sweep_to(tilt1_up)
+    pan_tilt_1.tilt.sweep_to(tilt1["up"])
     time.sleep(1)
-    pan_tilt_2.tilt.sweep_to(tilt2_up)
+    pan_tilt_2.tilt.sweep_to(tilt2["up"])
     time.sleep(1)
     tilt = "Up"
     is_up = True
@@ -65,9 +63,9 @@ def move_quarter_up():
     global is_quarter_up
     if is_quarter_up:
         return "Quarter Up"
-    pan_tilt_1.tilt.sweep_to(tilt1_quarter_up)
+    pan_tilt_1.tilt.sweep_to(tilt1["quarter_up"])
     time.sleep(1)
-    pan_tilt_2.tilt.sweep_to(tilt2_quarter_up)
+    pan_tilt_2.tilt.sweep_to(tilt2["quarter_up"])
     time.sleep(1)
     tilt = "Quarter Up"
     is_quarter_up = True
