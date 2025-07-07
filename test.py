@@ -41,6 +41,7 @@ def move_right():
     return pan
 
 def move_up():
+    global is_up
     if is_up:
         return "Up"
     pan_tilt_1.tilt.set_angle(tilt1_up)
@@ -51,6 +52,7 @@ def move_up():
     return tilt
 
 def move_quarter_up():
+    global is_quarter_up
     if is_quarter_up:
         return "Quarter Up"
     pan_tilt_1.tilt.set_angle(tilt1_quarter_up)
