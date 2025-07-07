@@ -26,7 +26,7 @@ else:
     from PanTilt import PanTilt
     from camera_controller import Camera
     pan_tilt_1: PanTilt = PanTilt(17, 27)
-    pan_tilt_2: PanTilt = PanTilt(23, 24)
+    pan_tilt_2: PanTilt = PanTilt(25, 24)
     camera_1: Camera = Camera(0)
     camera_2: Camera = Camera(1)
 
