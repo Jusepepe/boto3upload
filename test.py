@@ -7,7 +7,7 @@ pan_tilt_2: PanTilt = PanTilt(25, 24)
 is_up = False
 is_quarter_up = False
 
-pan1 = {"left": 100, "center": 75, "right": 30}
+pan1 = {"left": 105, "center": 75, "right": 30}
 pan2 = {"left": 45, "center": 80, "right": 115}
 tilt1 = {"up": 198, "quarter_up": 175}
 tilt2 = {"up": 140, "quarter_up": 125}
