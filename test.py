@@ -6,12 +6,18 @@ pan_tilt_2: PanTilt = PanTilt(25, 24)
 
 pan1_center = 75
 pan2_center = 80
+tilt1_up = 200
+tilt2_up = 145
+tilt1_quarter_up = 175
+tilt2_quarter_up = 125
+tilt1_three_quarter_up = 160
+tilt2_three_quarter_up = 100
 
 def reset_servos():
     pan_tilt_1.pan.set_angle(pan1_center)
     pan_tilt_2.pan.set_angle(pan2_center)
-    pan_tilt_1.tilt.set_angle(200)
-    pan_tilt_2.tilt.set_angle(145)
+    pan_tilt_1.tilt.set_angle(tilt1_quarter_up)
+    pan_tilt_2.tilt.set_angle(tilt2_quarter_up)
 
 def move_left():
     pan_tilt_1.pan.set_angle(95)
@@ -32,14 +38,14 @@ def move_right():
     return pan
 
 def move_up():
-    pan_tilt_1.tilt.set_angle(200)
-    pan_tilt_2.tilt.set_angle(145)
+    pan_tilt_1.tilt.set_angle(tilt1_up)
+    pan_tilt_2.tilt.set_angle(tilt2_up)
     tilt = "Up"
     return tilt
 
 def move_quarter_up():
-    pan_tilt_1.tilt.set_angle(175)
-    pan_tilt_2.tilt.set_angle(125)
+    pan_tilt_1.tilt.set_angle(tilt1_quarter_up)
+    pan_tilt_2.tilt.set_angle(tilt2_quarter_up)
     tilt = "Quarter Up"
     return tilt
 
@@ -71,7 +77,7 @@ for i, sequence in enumerate(complete_sequence):
 
     print("N°", i)
     print("Direction:", direction)
-    time.sleep(2)
+    time.sleep(1)
 
 
 
