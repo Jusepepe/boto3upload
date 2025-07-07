@@ -13,7 +13,7 @@ is_quarter_up = False
 pan1_angles = {"left": 105, "center": 75, "right": 30}
 pan2_angles = {"left": 45, "center": 80, "right": 115}
 tilt1_angles = {"up": 198, "quarter_up": 175}
-tilt2_angles = {"up": 140, "quarter_up": 125}
+tilt2_angles = {"up": 140, "quarter_up": 120}
 
 if platform.system() == "Windows":
     from pan_tilt_mock import PanTiltMock
