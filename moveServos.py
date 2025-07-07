@@ -41,9 +41,8 @@ def reset_servos():
     pan_tilt_2.tilt.set_angle(tilt2_angles["up"])
     time.sleep(1)
 
-reset_servos()
 print("Reset")
-
+reset_servos()
 time.sleep(2)
 
 def capture_image():
@@ -56,25 +55,25 @@ def upload_images(data_1, data_2, direction):
     upload_fileobj(data_2, bucket_name, path + "back/" + direction + ".jpg")
 
 def move_left():
-    pan_tilt_1.pan.sweep_to(pan1["left"])
+    pan_tilt_1.pan.sweep_to(pan1_angles["left"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(pan2["left"])
+    pan_tilt_2.pan.sweep_to(pan2_angles["left"])
     time.sleep(1)
     pan = "Left"
     return pan
 
 def move_center():
-    pan_tilt_1.pan.sweep_to(pan1["center"])
+    pan_tilt_1.pan.sweep_to(pan1_angles["center"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(pan2["center"])
+    pan_tilt_2.pan.sweep_to(pan2_angles["center"])
     time.sleep(1)
     pan = "Center"
     return pan
 
 def move_right():
-    pan_tilt_1.pan.sweep_to(pan1["right"])
+    pan_tilt_1.pan.sweep_to(pan1_angles["right"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(pan2["right"])
+    pan_tilt_2.pan.sweep_to(pan2_angles["right"])
     time.sleep(1)
     pan = "Right"
     return pan
@@ -83,9 +82,9 @@ def move_up():
     global is_up
     if is_up:
         return "Up"
-    pan_tilt_1.tilt.sweep_to(tilt1["up"])
+    pan_tilt_1.tilt.sweep_to(tilt1_angles["up"])
     time.sleep(1)
-    pan_tilt_2.tilt.sweep_to(tilt2["up"])
+    pan_tilt_2.tilt.sweep_to(tilt2_angles["up"])
     time.sleep(1)
     tilt = "Up"
     is_up = True
@@ -96,9 +95,9 @@ def move_quarter_up():
     global is_quarter_up
     if is_quarter_up:
         return "Quarter Up"
-    pan_tilt_1.tilt.sweep_to(tilt1["quarter_up"])
+    pan_tilt_1.tilt.sweep_to(tilt1_angles["quarter_up"])
     time.sleep(1)
-    pan_tilt_2.tilt.sweep_to(tilt2["quarter_up"])
+    pan_tilt_2.tilt.sweep_to(tilt2_angles["quarter_up"])
     time.sleep(1)
     tilt = "Quarter Up"
     is_quarter_up = True
@@ -124,8 +123,6 @@ def middle_sequence_left() -> list:
     return [move_quarter_up(), move_left()]
 
 complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right, middle_sequence_left, middle_sequence_center, middle_sequence_right]
-
-reset_servos()
 
 for i, sequence in enumerate(complete_sequence):
     tilt, pan = sequence()
