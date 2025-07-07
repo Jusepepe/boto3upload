@@ -18,25 +18,35 @@ tilt2_three_quarter_up = 100
 
 def reset_servos():
     pan_tilt_1.pan.set_angle(pan1_center)
+    time.sleep(1)
     pan_tilt_2.pan.set_angle(pan2_center)
+    time.sleep(1)
     pan_tilt_1.tilt.set_angle(tilt1_quarter_up)
+    time.sleep(1)
     pan_tilt_2.tilt.set_angle(tilt2_quarter_up)
+    time.sleep(1)
 
 def move_left():
     pan_tilt_1.pan.sweep_to(95)
+    time.sleep(1)
     pan_tilt_2.pan.sweep_to(55)
+    time.sleep(1)
     pan = "Left"
     return pan
 
 def move_center():
     pan_tilt_1.pan.sweep_to(pan1_center)
+    time.sleep(1)
     pan_tilt_2.pan.sweep_to(pan2_center)
+    time.sleep(1)
     pan = "Center"
     return pan
 
 def move_right():
     pan_tilt_1.pan.sweep_to(35)
+    time.sleep(1)
     pan_tilt_2.pan.sweep_to(110)
+    time.sleep(1)
     pan = "Right"
     return pan
 
@@ -45,7 +55,9 @@ def move_up():
     if is_up:
         return "Up"
     pan_tilt_1.tilt.sweep_to(tilt1_up)
+    time.sleep(1)
     pan_tilt_2.tilt.sweep_to(tilt2_up)
+    time.sleep(1)
     tilt = "Up"
     is_up = True
     is_quarter_up = False
@@ -56,7 +68,9 @@ def move_quarter_up():
     if is_quarter_up:
         return "Quarter Up"
     pan_tilt_1.tilt.sweep_to(tilt1_quarter_up)
+    time.sleep(1)
     pan_tilt_2.tilt.sweep_to(tilt2_quarter_up)
+    time.sleep(1)
     tilt = "Quarter Up"
     is_quarter_up = True
     is_up = False
