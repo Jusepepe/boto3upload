@@ -4,6 +4,9 @@ import time
 pan_tilt_1: PanTilt = PanTilt(17, 27)
 pan_tilt_2: PanTilt = PanTilt(25, 24)
 
+is_up = False
+is_quarter_up = False
+
 pan1_center = 75
 pan2_center = 80
 tilt1_up = 200
@@ -38,15 +41,23 @@ def move_right():
     return pan
 
 def move_up():
+    if is_up:
+        return "Up"
     pan_tilt_1.tilt.set_angle(tilt1_up)
     pan_tilt_2.tilt.set_angle(tilt2_up)
     tilt = "Up"
+    is_up = True
+    is_quarter_up = False
     return tilt
 
 def move_quarter_up():
+    if is_quarter_up:
+        return "Quarter Up"
     pan_tilt_1.tilt.set_angle(tilt1_quarter_up)
     pan_tilt_2.tilt.set_angle(tilt2_quarter_up)
     tilt = "Quarter Up"
+    is_quarter_up = True
+    is_up = False
     return tilt
 
 def upper_sequence_left() -> list:
