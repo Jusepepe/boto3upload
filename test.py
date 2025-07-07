@@ -13,6 +13,7 @@ tilt1 = {"up": 198, "quarter_up": 175}
 tilt2 = {"up": 140, "quarter_up": 125}
 
 def reset_servos():
+    time.sleep(1)
     pan_tilt_1.pan.set_angle(pan1["center"])
     time.sleep(1)
     pan_tilt_2.pan.set_angle(pan2["center"])
@@ -25,7 +26,7 @@ def reset_servos():
 def move_left():
     pan_tilt_1.pan.sweep_to(pan1["left"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(pan2["right"])
+    pan_tilt_2.pan.sweep_to(pan2["left"])
     time.sleep(1)
     pan = "Left"
     return pan
@@ -41,7 +42,7 @@ def move_center():
 def move_right():
     pan_tilt_1.pan.sweep_to(pan1["right"])
     time.sleep(1)
-    pan_tilt_2.pan.sweep_to(pan2["left"])
+    pan_tilt_2.pan.sweep_to(pan2["right"])
     time.sleep(1)
     pan = "Right"
     return pan
