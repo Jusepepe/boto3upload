@@ -22,9 +22,9 @@ class ESPController:
             return "Error al encender el motor"
         return "Motor encendido"
 
-    def step(self):
+    def step(self, steps: int):
         try:
-            response = requests.get(self.url + "step")
+            response = requests.get(self.url + "step/" + str(steps))
         except requests.exceptions.Timeout as e:
             print(e.request.url)
             return "Error al mover el motor"
@@ -51,24 +51,27 @@ esp0 = ESPController("http://172.20.10.5/", "adelante")
 esp1 = ESPController("http://172.20.10.6/", "atras")
 
 def moveForward():
-    return "Moviendo hacia adelante"
     esp1.disable()
     esp0.enable()
-    esp0.step()
+    esp0.step(2000)
     return "Moviendo hacia adelante"
 
 def moveBack():
-    return "Moviendo hacia atras"
     esp0.disable()
     esp1.enable()
-    esp1.step()
+    esp1.step(2000)
     return "Moviendo hacia atras"
 
 def checkLimitSwitch():
-    return False, False
     state0 = esp0.limitSwitch()
     state1 = esp1.limitSwitch()
     return state0, state1
+
+def returnToInitialPosition():
+    esp0.disable()
+    esp1.enable()
+    esp1.step(100000)
+    return "Moviendo hacia la posición inicial"
 
 if __name__ == "__main__":
     try:
