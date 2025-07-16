@@ -11,7 +11,7 @@ def upload_fileobj(data, bucket_name: str, object_name : str = None):
     # Upload the file
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_fileobj(data, bucket_name, object_name)
+        response = s3_client.upload_fileobj(data, bucket_name, object_name, ExtraArgs={"ContentType": "image/jpeg","ContentDisposition": "inline"})
     except ClientError as e:
         logging.error(e)
         return False

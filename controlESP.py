@@ -38,6 +38,15 @@ class ESPController:
             return "Error al obtener el estado del motor"
         return "Motor funcionando"
 
+    def limitSwitch(self):
+        try:
+            response = requests.get(self.url + "limitSwitch")
+            state = response.text.split(":")[1].strip()
+            return state
+        except requests.exceptions.Timeout as e:
+            print(e.request.url)
+            return "Error al obtener el estado del switch"
+
 esp0 = ESPController("http://172.20.10.5/", "adelante")
 esp1 = ESPController("http://172.20.10.6/", "atras")
 
@@ -54,6 +63,12 @@ def moveBack():
     esp1.enable()
     esp1.step()
     return "Moviendo hacia atras"
+
+def checkLimitSwitch():
+    return False, False
+    state0 = esp0.limitSwitch()
+    state1 = esp1.limitSwitch()
+    return state0, state1
 
 if __name__ == "__main__":
     try:
