@@ -1,4 +1,4 @@
 .env
 .venv
+*.swp
 __pycache__/
-.cameraControllerSaveImage.py.swp
