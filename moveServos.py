@@ -118,7 +118,7 @@ def middle_sequence_center() -> list:
 def middle_sequence_left() -> list:
     return [move_quarter_up(), move_left()]
 
-complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right, middle_sequence_left, middle_sequence_center, middle_sequence_right]
+complete_sequence : list = [upper_sequence_left, upper_sequence_center, upper_sequence_right]#, middle_sequence_left, middle_sequence_center, middle_sequence_right]
 
 if __name__ == "__main__":
     print("Reset")
