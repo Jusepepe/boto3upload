@@ -78,9 +78,9 @@ try:
         
         if file_name.lower() == "t":
             data = capture_image()
-            upload_fileobj(data, "citric-bucket")
+            upload_fileobj(data, "citric-bucket2")
         else:
-            upload_file(file_name, "citric-bucket")
+            upload_file(file_name, "citric-bucket2")
 
 except KeyboardInterrupt:
     pass

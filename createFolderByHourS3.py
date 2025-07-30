@@ -4,7 +4,7 @@ import os
 
 s3: boto3.client = boto3.client('s3')
 
-bucket_name: str = 'citric-bucket'
+bucket_name: str = 'citric-bucket2'
 
 images_path: str = "./"
 
