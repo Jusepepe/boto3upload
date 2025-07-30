@@ -15,14 +15,7 @@ try:
         print("Track:", initial_track)
         track = "Track_" + str(initial_track)
         path: str = day + "/raw/" + hour + "/" + track + "/"
-        for i, sequence in enumerate(complete_sequence):
-            tilt, pan = sequence()
-            direction = tilt + "_" + pan
-
-            print("N°", i)
-            print("Direction:", direction)
-            data_1, data_2 = capture_image()
-            upload_images(data_1, data_2, path, direction)
+        upload_images(data_1, data_2, path, "middle")
         initial_track += 1
         moveForward()
         time.sleep(1)
