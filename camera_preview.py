@@ -1,14 +1,12 @@
-import cv2
 from picamera2 import Picamera2
+from picamera2.previews.drpreview import DRMPreview
+import time
 
 picam2 = Picamera2()
-picam2.configure(picam2.preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
+preview = DRMPreview()
+picam2.start_preview(preview)
 picam2.start()
 
-while True:
-    frame = picam2.capture_array()
-    cv2.imshow("Preview", frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+time.sleep(10)  # Preview durante 10 segundos
 
-cv2.destroyAllWindows()
+picam2.stop()
