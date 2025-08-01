@@ -47,8 +47,8 @@ class ESPController:
             print(e.request.url)
             return "Error al obtener el estado del switch"
 
-esp0 = ESPController("http://172.20.10.5/", "adelante")
-esp1 = ESPController("http://172.20.10.6/", "atras")
+esp0 = ESPController("http://192.168.1.56/", "adelante")
+esp1 = ESPController("http://192.168.1.55/", "atras")
 
 def moveForward():
     esp1.disable()
