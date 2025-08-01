@@ -2,7 +2,10 @@ from picamera2 import Picamera2
 import cv2
 
 picam2 = Picamera2()
-picam2.configure(picam2.preview_configuration(main={"format": "RGB888", "size": (640, 480)}))
+
+# Crear configuración para vista previa
+config = picam2.create_preview_configuration(main={"format": "RGB888", "size": (640, 480)})
+picam2.configure(config)
 picam2.start()
 
 while True:
