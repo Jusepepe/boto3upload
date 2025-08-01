@@ -5,7 +5,7 @@ from boto_controller import upload_fileobj
 day: str = time.strftime("%Y-%m-%d", time.localtime())
 hour: str = time.strftime("%H:00_%p", time.localtime())
 path: str = day + "/raw/" + hour + "/Track_1/"
-bucket_name: str = 'citric-bucket2'
+bucket_name: str = 'citric-bucket'
 
 is_up = False
 is_quarter_up = False

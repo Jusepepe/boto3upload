@@ -4,7 +4,7 @@ import time
 
 day: str = time.strftime("%Y-%m-%d", time.localtime())
 hour: str = time.strftime("%H:00_%p", time.localtime())
-bucket_name: str = 'citric-bucket2'
+bucket_name: str = 'citric-bucket'
 initial_track: int = 1
 
 time.sleep(1)

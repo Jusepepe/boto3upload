@@ -19,7 +19,7 @@ views: dict = {
 
 s3: boto3.client = boto3.client('s3')
 
-bucket_name: str = 'citric-bucket2'
+bucket_name: str = 'citric-bucket'
 
 day: str = time.strftime("%Y-%m-%d", time.localtime())
 hour: str = time.strftime("%H:00_%p", time.localtime())
