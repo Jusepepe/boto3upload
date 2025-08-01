@@ -1,12 +1,11 @@
 from picamera2 import Picamera2
-from picamera2.previews.gl_preview import GLPreview
+from picamera2.previews.drpreview import DRMPreview
 import time
 
 picam2 = Picamera2()
-preview = GLPreview()
+preview = DRMPreview()
 picam2.start_preview(preview)
 picam2.start()
-
 time.sleep(10)
-
 picam2.stop()
+preview.close()
