@@ -1,13 +1,14 @@
+import cv2
 from picamera2 import Picamera2
-from picamera2.previews.qt import QGlPicamera2
-from PyQt6.QtWidgets import QApplication
-import sys
-
-app = QApplication(sys.argv)
 
 picam2 = Picamera2()
-preview = QGlPicamera2(picam2, width=640, height=480)
-preview.show()
-
+picam2.configure(picam2.preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
 picam2.start()
-app.exec()
+
+while True:
+    frame = picam2.capture_array()
+    cv2.imshow("Preview", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
