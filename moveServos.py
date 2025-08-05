@@ -47,8 +47,8 @@ def capture_image():
     return data_1, data_2
 
 def upload_images(data_1, data_2, path, direction):
-    upload_fileobj(data_1, bucket_name, path + "front/" + direction + ".jpg")
-    upload_fileobj(data_2, bucket_name, path + "back/" + direction + ".jpg")
+    upload_fileobj(data_1, bucket_name, path + "front/" + direction + ".png")
+    upload_fileobj(data_2, bucket_name, path + "back/" + direction + ".png")
 
 def move_left():
     pan_tilt_1.pan.sweep_to(pan1_angles["left"])
