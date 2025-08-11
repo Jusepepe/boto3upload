@@ -9,7 +9,7 @@ initial_track: int = 1
 
 time.sleep(1)
 
-""" try:
+try:
     while not int(checkLimitSwitch()[0]):
         print("Track:", initial_track)
         track = "Track_" + str(initial_track)
@@ -20,13 +20,7 @@ time.sleep(1)
         moveForward()
         time.sleep(1)
 
-    returnToInitialPosition() """
-try:
-    print("Track:", initial_track)
-    track = "Track_" + str(initial_track)
-    path: str = day + "/raw/" + hour + "/" + track + "/"
-    data_1, data_2 = capture_image()
-    upload_images(data_1, data_2, path, "middle")
+    returnToInitialPosition()
 except KeyboardInterrupt:
     pass
 finally:
