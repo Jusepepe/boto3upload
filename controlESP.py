@@ -53,13 +53,13 @@ esp1 = ESPController("http://192.168.1.55/", "atras")
 def moveForward():
     esp1.disable()
     esp0.enable()
-    esp0.step(5000)
+    esp0.step(3000)
     return "Moviendo hacia adelante"
 
 def moveBack():
     esp0.disable()
     esp1.enable()
-    esp1.step(5000)
+    esp1.step(3000)
     return "Moviendo hacia atras"
 
 def checkLimitSwitch():
