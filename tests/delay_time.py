@@ -1,10 +1,6 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
 import time
-from camera_controller import Camera
-from boto_controller import upload_fileobj
+from controllers.camera_controller import Camera
+from controllers.boto_controller import upload_fileobj
 
 # ------------------------
 # Dependency Injection: Object Detection Model
