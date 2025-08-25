@@ -52,7 +52,7 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
     for camera_id in camera_ids:
         cam = Camera(camera_id)
         timer.mark("start_capture_camera_"+str(camera_id))
-        image_data = cam.capture_image().getvalue()  # get PNG bytes
+        image_data = cam.capture_image()  # get PNG bytes
         timer.mark("end_capture_camera_"+str(camera_id))
 
         # Step 2: Upload
