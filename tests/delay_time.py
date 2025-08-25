@@ -1,5 +1,8 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 import time
-import uuid
 from camera_controller import Camera
 from boto_controller import upload_fileobj
 
@@ -51,7 +54,7 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
         timer.mark("start_capture_camera_"+str(camera_id))
         image_data = cam.capture_image().getvalue()  # get PNG bytes
         timer.mark("end_capture_camera_"+str(camera_id))
-        
+
         # Step 2: Upload
         upload_fileobj(image_data, bucket_name, "test/image-captured_"+str(camera_id)+".png")
         timer.mark("end_upload_camera_"+str(camera_id))
