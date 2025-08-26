@@ -1,5 +1,6 @@
 import time
 import sys
+import PIL
 from controllers.camera_controller import Camera
 from controllers.boto_controller import upload_fileobj
 from cv_models.base import ObjectDetectionModel
@@ -47,7 +48,9 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
         timer.mark("end_inference_camera_"+str(camera_id))
 
         # Step 4: Upload Inference
-        upload_fileobj(results, bucket_name, "test/image-inference_"+str(camera_id)+".png")
+        annotated_image = results.plot()
+        annotated_image = PIL.Image.fromarray(annotated_image)
+        upload_fileobj(annotated_image, bucket_name, "test/image-inference_"+str(camera_id)+".png")
         timer.mark("end_upload_inference_camera_"+str(camera_id))
 
     # Step 5: Report
