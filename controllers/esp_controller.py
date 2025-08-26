@@ -5,9 +5,10 @@ This module provides a controller for ESP32-based motor control over HTTP.
 It handles communication with an ESP32 web server to control motor movements.
 """
 
+import os
 import requests
 from time import sleep
-from typing import Optional
+from typing import Optional, Tuple
 
 
 class ESPController:
@@ -115,10 +116,40 @@ def create_esp_controller(ip_address: str = "192.168.1.56", direction: str = "fo
     return ESPController(base_url=base_url, direction=direction)
 
 
+# --- Backward-compatible functions (for legacy scripts) ---
+# Two controllers: one for forward motion and one for backward motion.
+_forward_controller: Optional[ESPController] = None
+_backward_controller: Optional[ESPController] = None
+
+
+def set_esp_ips(forward_ip: str, backward_ip: str,
+                forward_direction: str = "forward",
+                backward_direction: str = "backward") -> None:
+    """Explicitly configure the forward/backward ESP controllers."""
+    global _forward_controller, _backward_controller
+    _forward_controller = create_esp_controller(forward_ip, forward_direction)
+    _backward_controller = create_esp_controller(backward_ip, backward_direction)
+
+
+def get_forward_controller() -> ESPController:
+    global _forward_controller
+    if _forward_controller is None:
+        fwd_ip = os.getenv("ESP_FORWARD_IP", "192.168.1.56")
+        _forward_controller = create_esp_controller(fwd_ip, "forward")
+    return _forward_controller
+
+
+def get_backward_controller() -> ESPController:
+    global _backward_controller
+    if _backward_controller is None:
+        back_ip = os.getenv("ESP_BACKWARD_IP", "192.168.1.55")
+        _backward_controller = create_esp_controller(back_ip, "backward")
+    return _backward_controller
+
 # Example usage
 if __name__ == "__main__":
     # Example usage
-    controller = create_esp_controller("192.168.1.56", "forward")
+    forward_controller = _get_forward_controller()
     
     try:
         print(controller.enable())

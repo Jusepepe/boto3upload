@@ -1,6 +1,6 @@
 import platform
 import time
-from boto_controller import upload_fileobj
+from controllers.boto_controller import upload_fileobj
 
 day: str = time.strftime("%Y-%m-%d", time.localtime())
 hour: str = time.strftime("%H:00_%p", time.localtime())
@@ -16,15 +16,15 @@ tilt1_angles = {"up": 198, "quarter_up": 175}
 tilt2_angles = {"up": 140, "quarter_up": 120}
 
 if platform.system() == "Windows":
-    from pan_tilt_mock import PanTiltMock
-    from camera_mock import CameraMock
+    from mocks.pan_tilt_mock import PanTiltMock
+    from mocks.camera_mock import CameraMock
     pan_tilt_1: PanTiltMock = PanTiltMock(17, 27)
     pan_tilt_2: PanTiltMock = PanTiltMock(25, 24)
     camera_1: CameraMock = CameraMock(0)
     camera_2: CameraMock = CameraMock(1)
 else:
-    from PanTilt import PanTilt
-    from camera_controller import Camera
+    from controllers.pan_tilt import PanTilt
+    from controllers.camera_controller import Camera
     pan_tilt_1: PanTilt = PanTilt(17, 27)
     pan_tilt_2: PanTilt = PanTilt(25, 24)
     camera_1: Camera = Camera(0)

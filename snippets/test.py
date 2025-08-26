@@ -1,4 +1,4 @@
-from PanTilt import PanTilt
+from controllers.pan_tilt import PanTilt
 import time
 
 pan_tilt_1: PanTilt = PanTilt(17, 27)
