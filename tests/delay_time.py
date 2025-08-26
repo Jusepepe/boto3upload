@@ -1,22 +1,7 @@
 import time
 from controllers.camera_controller import Camera
 from controllers.boto_controller import upload_fileobj
-
-# ------------------------
-# Dependency Injection: Object Detection Model
-# ------------------------
-class ObjectDetectionModel:
-    def process(self, image_data: bytes):
-        """Run inference on the image (bytes). Must be implemented by subclasses."""
-        raise NotImplementedError
-
-
-class DummyYOLO(ObjectDetectionModel):
-    """Example model that simulates inference."""
-    def process(self, image_data: bytes):
-        time.sleep(0.5)  # simulate processing delay
-        return {"detections": [{"class": "person", "confidence": 0.91}]}
-
+from cv_models.dummy_yolo import DummyYOLO
 
 # ------------------------
 # Latency Timer
