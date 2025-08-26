@@ -52,7 +52,7 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
         print(f"{step}: {latency:.4f} sec")
 
     print("\n--- Results ---")
-    print("Results:", results)
+    print("Results:", results.boxes)
 
 
 # ------------------------

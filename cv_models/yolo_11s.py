@@ -1,8 +1,6 @@
-import time
 from .base import ObjectDetectionModel
 from ultralytics import YOLO
 from PIL import Image
-import io
 
 class Yolo11s(ObjectDetectionModel):
     def __init__(self):
