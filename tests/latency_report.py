@@ -46,7 +46,11 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
         results = model.process(image_data)
         timer.mark("end_inference_camera_"+str(camera_id))
 
-    # Step 4: Report
+        # Step 4: Upload Inference
+        upload_fileobj(results, bucket_name, "test/image-inference_"+str(camera_id)+".png")
+        timer.mark("end_upload_inference_camera_"+str(camera_id))
+
+    # Step 5: Report
     print("\n--- Latency Report ---")
     for step, latency in timer.report().items():
         print(f"{step}: {latency:.4f} sec")
