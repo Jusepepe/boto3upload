@@ -10,6 +10,7 @@ from typing import BinaryIO, Optional
 import boto3
 from botocore.exceptions import ClientError
 
+s3_client = boto3.client('s3')
 
 def upload_fileobj(
     file_obj: BinaryIO,
@@ -33,7 +34,6 @@ def upload_fileobj(
     if object_name is None:
         object_name = "image-captured.png"
 
-    s3_client = boto3.client('s3')
     try:
         s3_client.upload_fileobj(
             file_obj,

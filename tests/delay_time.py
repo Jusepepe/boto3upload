@@ -1,4 +1,5 @@
 import time
+import sys
 from controllers.camera_controller import Camera
 from controllers.boto_controller import upload_fileobj
 from cv_models.base import ObjectDetectionModel
