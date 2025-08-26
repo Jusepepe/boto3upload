@@ -49,8 +49,11 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
 
         # Step 4: Upload Inference
         annotated_image = results[0].plot()
-        annotated_image = PIL.Image.fromarray(annotated_image, "RGB")
-        upload_fileobj(annotated_image, bucket_name, "test/image-inference_"+str(camera_id)+".png")
+        annotated_image = PIL.Image.fromarray(annotated_image).convert("RGB")
+        image_data = io.BytesIO()
+        annotated_image.save(image_data, "PNG")
+        image_data.seek(0)
+        upload_fileobj(image_data, bucket_name, "test/image-inference_"+str(camera_id)+".png")
         timer.mark("end_upload_inference_camera_"+str(camera_id))
 
     # Step 5: Report
