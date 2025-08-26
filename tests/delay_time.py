@@ -3,6 +3,7 @@ from controllers.camera_controller import Camera
 from controllers.boto_controller import upload_fileobj
 from cv_models.base import ObjectDetectionModel
 from cv_models.dummy_yolo import DummyYOLO
+from cv_models.yolo_11s import Yolo11s
 
 # ------------------------
 # Latency Timer
@@ -59,5 +60,5 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
 # ------------------------
 if __name__ == "__main__":
     bucket = "citric-bucket"
-    model = DummyYOLO()
+    model = Yolo11s()
     run_pipeline(model, bucket, camera_ids=[0, 1])
