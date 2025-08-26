@@ -51,8 +51,7 @@ class MemoryProfiler:
             "RAM_peak_MB": peak / (1024**2),
             "ROM_before_MB": rom_before,
             "ROM_after_MB": rom_after,
-            "Inference_time_sec": end - start,
-            "Result": result
+            "Inference_time_sec": end - start
         }
         return report
 
