@@ -60,5 +60,5 @@ def run_pipeline(model: ObjectDetectionModel, bucket_name: str, camera_ids: list
 # ------------------------
 if __name__ == "__main__":
     bucket = "citric-bucket"
-    model = DummyYOLO()
+    model = Yolo11s()
     run_pipeline(model, bucket, camera_ids=[0, 1])
