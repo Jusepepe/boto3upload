@@ -29,7 +29,7 @@ try:
     backward_controller.disable()
     forward_controller.enable()
     while not int(forward_controller.check_limit_switch()):
-        if initial_track == 10:
+        if initial_track == 11:
             break
         print("Track:", initial_track)
         track = "Track_" + str(initial_track)
@@ -37,13 +37,16 @@ try:
         data_1, data_2 = capture_image()
         upload_images(data_1, data_2, path, "middle")
         initial_track += 1
-        forward_controller.step(2000)
+        forward_controller.step(4000)
         time.sleep(1)
 
+    forward_controller.disable()
+    backward_controller.check_limit_switch() # Check if limitSwitch triggered by error
+    backward_controller.enable()
+    backward_controller.step(30000)
 except KeyboardInterrupt:
     pass
 finally:
     forward_controller.disable()
-    backward_controller.enable()
-    backward_controller.step(25000)
+    backward_controller.disable()
     print("Subida de archivos terminada")
