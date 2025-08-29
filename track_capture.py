@@ -26,8 +26,10 @@ backward_controller = get_backward_controller()
 time.sleep(1)
 
 try:
+    backward_controller.disable()
+    forward_controller.enable()
     while not int(forward_controller.check_limit_switch()):
-        if initial_track == 6:
+        if initial_track == 10:
             break
         print("Track:", initial_track)
         track = "Track_" + str(initial_track)
@@ -38,8 +40,10 @@ try:
         forward_controller.step(2000)
         time.sleep(1)
 
-    backward_controller.step(25000)
 except KeyboardInterrupt:
     pass
 finally:
+    forward_controller.disable()
+    backward_controller.enable()
+    backward_controller.step(25000)
     print("Subida de archivos terminada")

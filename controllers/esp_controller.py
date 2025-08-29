@@ -7,8 +7,7 @@ It handles communication with an ESP32 web server to control motor movements.
 
 import os
 import requests
-from time import sleep
-from typing import Optional, Tuple
+from typing import Optional
 
 
 class ESPController:
