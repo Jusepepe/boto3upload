@@ -43,6 +43,18 @@ class Camera:
         finally:
             self.picam2.stop()
 
+    def capture_image_low_res(self) -> BinaryIO:
+        """Capture an image with lower resolution and return it as a BytesIO object."""
+        try:
+            self.picam2.start()
+            sleep(1)  # Allow camera to warm up
+            data = io.BytesIO()
+            self.picam2.capture_file(data, format='png', size=(720, 480))
+            data.seek(0)
+            return data
+        finally:
+            self.picam2.stop()
+
     def __del__(self):
         """Ensure camera resources are properly released."""
         if hasattr(self, 'picam2') and self.picam2 is not None:

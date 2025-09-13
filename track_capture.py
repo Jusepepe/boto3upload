@@ -11,6 +11,11 @@ def capture_image():
     data_2 = camera_2.capture_image()
     return data_1, data_2
 
+def capture_image_low_res():
+    data_1 = camera_1.capture_image_low_res()
+    data_2 = camera_2.capture_image_low_res()
+    return data_1, data_2
+
 def upload_images(data_1, data_2, path, direction):
     upload_fileobj(data_1, bucket_name, path + "front/" + direction + ".png")
     upload_fileobj(data_2, bucket_name, path + "back/" + direction + ".png")
@@ -35,6 +40,9 @@ try:
         track = "Track_" + str(initial_track)
         path: str = day + "/raw/" + hour + "/" + track + "/"
         data_1, data_2 = capture_image()
+        if initial_track == 1:
+            data_1_low_res, data_2_low_res = capture_image_low_res()
+            upload_images(data_1_low_res, data_2_low_res, path, "thumbnail")
         upload_images(data_1, data_2, path, "middle")
         initial_track += 1
         forward_controller.step(4000)
