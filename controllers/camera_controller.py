@@ -53,7 +53,7 @@ class Camera:
             self.picam2.start()
             sleep(1)  # Allow camera to warm up
             data = io.BytesIO()
-            self.picam2.switch_mode_and_capture_file(data, format='png', delay=5)
+            self.picam2.switch_mode_and_capture_file(low_res_config, data, format='png', delay=5)
             data.seek(0)
             return data
         finally:
