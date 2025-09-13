@@ -46,10 +46,14 @@ class Camera:
     def capture_image_low_res(self) -> BinaryIO:
         """Capture an image with lower resolution and return it as a BytesIO object."""
         try:
+            low_res_config = self.picam2.create_still_configuration(
+                main={"format": "RGB888", "size": (720, 480)}
+            )
+            self.picam2.configure(low_res_config)
             self.picam2.start()
             sleep(1)  # Allow camera to warm up
             data = io.BytesIO()
-            self.picam2.capture_file(data, format='png', size=(720, 480))
+            self.picam2.switch_mode_and_capture_file(data, format='png', delay=5)
             data.seek(0)
             return data
         finally:
